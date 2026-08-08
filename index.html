@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📐 امتحان Cambridge IGCSE Math 0580 — مايو/يونيو 2015</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      fontFamily: {
+        'arabic': ['Cairo', 'sans-serif'],
+        'english': ['Inter', 'sans-serif'],
+      }
+    }
+  }
+}
+</script>
+<style>
+*{box-sizing:border-box}
+body{font-family:'Cairo',sans-serif;margin:0;background:#f9fafb;transition:background .3s}
+.dark body{background:#0f172a;color:#e2e8f0}
+body.en-mode{font-family:'Inter',sans-serif}
+.correct{background-color:#dcfce7!important;border-color:#16a34a!important}
+.dark .correct{background-color:#052e16!important;border-color:#16a34a!important}
+.incorrect{background-color:#fee2e2!important;border-color:#dc2626!important}
+.dark .incorrect{background-color:#450a0a!important;border-color:#dc2626!important}
+.timer-warning{color:#dc2626!important;animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.5}}
+@media print{
+  .no-print{display:none!important}
+  .page-break{page-break-before:always}
+  body{padding-top:0;background:white}
+  .sidebar{display:none}
+  .main-container{margin:0!important}
+  .question-card{break-inside:avoid;box-shadow:none;border:1px solid #ccc}
+}
+.success-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-weight:bold;font-size:.875rem}
+.grade-excellent{background:#dcfce7;color:#166534}
+.grade-good{background:#fef3c7;color:#92400e}
+.grade-pass{background:#dbeafe;color:#1e40af}
+.grade-fail{background:#fee2e2;color:#991b1b}
+.question-card{
+  background:white;border-radius:10px;padding:14px 16px;margin-bottom:10px;
+  box-shadow:0 2px 6px rgba(0,0,0,.05);border-left:4px solid #059669;
+  transition:all .3s;font-size:.87rem;line-height:1.7;
+  scroll-margin-top:80px;
+}
+.dark .question-card{background:#1e293b;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+[dir="rtl"] .question-card{border-left:none;border-right:4px solid #059669}
+.question-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.09);transform:translateY(-1px)}
+.dark .question-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.5)}
+.marks-badge{
+  display:inline-block;background:linear-gradient(135deg,#059669,#10b981);
+  color:white;padding:2px 8px;border-radius:10px;font-size:.66rem;font-weight:bold;margin-left:6px;
+}
+.tier-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.62rem;font-weight:bold;margin-left:4px}
+.tier-higher{background:#fee2e2;color:#991b1b}
+.tier-foundation{background:#dbeafe;color:#1e40af}
+.answer-input{
+  border:2px solid #e5e7eb;border-radius:6px;padding:6px 10px;
+  width:100%;max-width:320px;font-family:inherit;font-size:.82rem;transition:all .3s;
+  background:white;color:#1f2937;
+}
+.dark .answer-input{background:#0f172a;color:#e2e8f0;border-color:#334155}
+.answer-input:focus{outline:none;border-color:#059669;box-shadow:0 0 0 3px rgba(5,150,105,.1)}
+.answer-input.is-correct{border-color:#16a34a;background:#f0fdf4}
+.answer-input.is-incorrect{border-color:#dc2626;background:#fef2f2}
+.dark .answer-input.is-correct{background:#052e16}
+.dark .answer-input.is-incorrect{background:#450a0a}
+.section-header{color:white;padding:12px 18px;border-radius:10px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.15);scroll-margin-top:60px}
+.section-header h2{margin:0;font-size:.95rem;font-weight:bold;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.paper-badge{display:inline-block;background:rgba(255,255,255,.25);padding:3px 10px;border-radius:8px;font-size:.72rem}
+.reveal-btn{
+  background:linear-gradient(135deg,#059669,#10b981);color:white;border:none;
+  padding:3px 10px;border-radius:6px;cursor:pointer;font-size:.7rem;font-weight:600;transition:all .2s;
+}
+.reveal-btn:hover{transform:scale(1.05);box-shadow:0 2px 8px rgba(5,150,105,.4)}
+.answer-box{
+  background:linear-gradient(135deg,#dcfce7,#bbf7d0);border:2px solid #16a34a;
+  border-radius:8px;padding:8px 12px;margin-top:8px;font-size:.8rem;color:#166534;
+}
+.dark .answer-box{background:#052e16;border-color:#16a34a;color:#86efac}
+.top-nav{
+  position:fixed;top:0;left:0;right:0;background:white;box-shadow:0 2px 10px rgba(0,0,0,.1);
+  z-index:200;padding:5px 10px;border-bottom:2px solid #e5e7eb;
+}
+.dark .top-nav{background:#1e293b;border-bottom-color:#334155}
+.top-nav-container{max-width:1500px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.nav-title{font-weight:bold;color:#059669;font-size:.78rem;white-space:nowrap}
+.dark .nav-title{color:#10b981}
+.nav-links{display:flex;gap:3px;flex-wrap:wrap}
+.nav-link{
+  padding:3px 7px;background:#f3f4f6;color:#4b5563;border-radius:6px;
+  text-decoration:none;font-size:.64rem;font-weight:600;transition:all .2s;white-space:nowrap;
+}
+.dark .nav-link{background:#334155;color:#cbd5e1}
+.nav-link:hover{background:#d1fae5;color:#059669}
+.dark .nav-link:hover{background:#064e3b;color:#10b981}
+.progress-container{flex:1;min-width:70px;max-width:180px;display:flex;align-items:center;gap:6px}
+.progress-bar-wrapper{flex:1;height:6px;background:#e5e7eb;border-radius:3px;overflow:hidden}
+.dark .progress-bar-wrapper{background:#334155}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,#059669,#10b981);transition:width .3s;border-radius:3px}
+.progress-text{font-size:.66rem;color:#6b7280;font-weight:600;white-space:nowrap}
+.sidebar{
+  position:fixed;top:55px;right:10px;width:235px;max-height:calc(100vh - 70px);
+  overflow-y:auto;background:white;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.1);
+  padding:10px;z-index:100;font-size:.66rem;
+}
+.dark .sidebar{background:#1e293b;box-shadow:0 4px 16px rgba(0,0,0,.5)}
+[dir="ltr"] .sidebar{right:auto;left:10px}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:2px}
+.dark .sidebar::-webkit-scrollbar-thumb{background:#475569}
+.sidebar-title{font-weight:bold;color:#059669;margin-bottom:8px;padding-bottom:6px;border-bottom:2px solid #e5e7eb;font-size:.74rem}
+.dark .sidebar-title{color:#10b981;border-bottom-color:#334155}
+.sidebar-session{font-weight:bold;color:white;padding:4px 8px;margin:6px 0 3px;border-radius:6px;font-size:.68rem}
+.sidebar-link{
+  display:flex;align-items:center;gap:4px;padding:2px 8px;color:#6b7280;
+  text-decoration:none;border-radius:4px;font-size:.63rem;margin:1px 0;transition:all .2s;
+}
+.dark .sidebar-link{color:#94a3b8}
+.sidebar-link:hover{background:#d1fae5;color:#059669}
+.dark .sidebar-link:hover{background:#064e3b;color:#10b981}
+.sidebar-link.answered{font-weight:bold;color:#059669}
+.sidebar-link.correct::before{content:'✓';color:#16a34a;font-weight:bold}
+.sidebar-link.incorrect::before{content:'✗';color:#dc2626;font-weight:bold}
+body{padding-top:55px}
+@media(min-width:1350px){
+  .main-container{margin-right:255px;margin-left:16px}
+  [dir="ltr"] .main-container{margin-left:255px;margin-right:16px}
+}
+@media(max-width:1349px){.sidebar{display:none}}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:8px;margin:10px 0}
+.stat-card{background:white;border-radius:8px;padding:10px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.05)}
+.dark .stat-card{background:#1e293b}
+.stat-number{font-size:1.2rem;font-weight:bold;color:#059669}
+.dark .stat-number{color:#10b981}
+.stat-label{font-size:.62rem;color:#6b7280}
+.dark .stat-label{color:#94a3b8}
+.btn-action{
+  padding:8px 16px;border-radius:8px;font-size:.8rem;font-weight:600;
+  cursor:pointer;border:none;transition:all .3s;
+}
+.btn-action:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.btn-action:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.lang-switch{display:flex;gap:3px;border:2px solid #059669;border-radius:25px;padding:3px;background:white}
+.dark .lang-switch{background:#1e293b;border-color:#10b981}
+.lang-btn{
+  padding:4px 10px;border-radius:18px;cursor:pointer;font-weight:bold;
+  transition:all .3s;border:none;font-size:.75rem;background:transparent;color:#6b7280;
+}
+.dark .lang-btn{color:#94a3b8}
+.lang-btn.active{background:#059669;color:white}
+.svg-figure{background:#f0fdfa;border:2px dashed #14b8a6;border-radius:8px;padding:8px;margin:8px 0;text-align:center}
+.dark .svg-figure{background:#042f2e;border-color:#0d9488}
+.svg-figure svg{max-width:100%;height:auto}
+.svg-caption{font-size:.65rem;color:#0f766e;font-weight:600;margin-top:4px}
+.dark .svg-caption{color:#5eead4}
+.data-table{width:100%;border-collapse:collapse;margin:8px 0;font-size:.75rem}
+.data-table th,.data-table td{border:1px solid #d1d5db;padding:4px 8px;text-align:center}
+.data-table th{background:#ecfdf5;color:#065f46}
+.dark .data-table th{background:#064e3b;color:#6ee7b7}
+.dark .data-table td{border-color:#475569}
+.floating-nav{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  background:white;border-radius:50px;box-shadow:0 8px 24px rgba(0,0,0,.2);
+  padding:8px 16px;display:flex;gap:8px;z-index:100;
+}
+.dark .floating-nav{background:#1e293b}
+.floating-btn{
+  width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;
+  font-size:1.1rem;transition:all .2s;display:flex;align-items:center;justify-content:center;
+}
+.floating-btn:hover{transform:scale(1.1)}
+.floating-btn.primary{background:#059669;color:white}
+.floating-btn.secondary{background:#f3f4f6;color:#4b5563}
+.dark .floating-btn.secondary{background:#334155;color:#e2e8f0}
+.toast{
+  position:fixed;top:70px;left:50%;transform:translateX(-50%);
+  background:#059669;color:white;padding:10px 20px;border-radius:8px;
+  box-shadow:0 4px 12px rgba(0,0,0,.2);z-index:1000;font-weight:600;font-size:.9rem;
+  opacity:0;transition:opacity .3s;pointer-events:none;
+}
+.toast.show{opacity:1}
+.modal-backdrop{
+  position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;
+  display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.modal-backdrop.show{opacity:1;pointer-events:auto}
+.modal-content{
+  background:white;border-radius:16px;padding:24px;max-width:400px;width:90%;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);transform:scale(.9);transition:transform .3s;
+}
+.dark .modal-content{background:#1e293b;color:#e2e8f0}
+.modal-backdrop.show .modal-content{transform:scale(1)}
+.timer-display{
+  background:linear-gradient(135deg,#10b981,#059669);color:white;
+  padding:8px 20px;border-radius:50px;font-weight:bold;font-family:monospace;
+  font-size:1.3rem;box-shadow:0 4px 12px rgba(5,150,105,.3);
+}
+.timer-display.warning{background:linear-gradient(135deg,#ef4444,#dc2626);box-shadow:0 4px 12px rgba(220,38,38,.3);animation:pulse 1s infinite}
+.answered-counter{
+  display:inline-block;background:#059669;color:white;padding:1px 6px;
+  border-radius:10px;font-size:.6rem;margin-right:4px;min-width:16px;text-align:center;
+}
+.variant-badge{
+  display:inline-block;background:#f59e0b;color:white;padding:1px 6px;
+  border-radius:4px;font-size:.6rem;font-weight:bold;margin-right:4px;vertical-align:middle;
+}
+</style>
+</head>
+<body class="text-gray-800 min-h-screen">
+<nav class="top-nav no-print">
+  <div class="top-nav-container">
+    <div class="nav-title">📐 Cambridge IGCSE 0580 — M/J 2015</div>
+    <div class="nav-links">
+      <a href="#p1" class="nav-link" style="background:#dbeafe;color:#1e40af;">📘 P1 Core</a>
+      <a href="#p2" class="nav-link" style="background:#fee2e2;color:#991b1b;">📕 P2 Ext</a>
+      <a href="#p3" class="nav-link" style="background:#d1fae5;color:#065f46;">📗 P3 Core</a>
+      <a href="#p4" class="nav-link" style="background:#ffedd5;color:#9a3412;">📙 P4 Ext</a>
+    </div>
+    <div class="progress-container">
+      <div class="progress-bar-wrapper"><div class="progress-bar-fill" id="progressBar" style="width:0%"></div></div>
+      <span class="progress-text" id="progressText">0%</span>
+    </div>
+    <div style="display:flex;gap:6px;align-items:center;">
+      <div class="timer-display" id="timerDisplay">07:00:00</div>
+      <button onclick="toggleTimer()" id="timerToggle" class="floating-btn secondary no-print" title="إيقاف/تشغيل">⏸️</button>
+      <button onclick="scrollToTop()" class="floating-btn secondary no-print" title="الذهاب للأعلى">⬆️</button>
+      <button onclick="toggleDarkMode()" class="floating-btn secondary no-print" title="الوضع الليلي" id="darkModeBtn">🌙</button>
+      <div class="lang-switch">
+        <button class="lang-btn active" onclick="setLanguage('ar')" id="btn-ar">عربي</button>
+        <button class="lang-btn" onclick="setLanguage('en')" id="btn-en">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<aside class="sidebar no-print" id="sidebar"></aside>
+
+<div class="main-container">
+  <div class="max-w-4xl mx-auto mb-3 text-center no-print" style="margin-top:12px;">
+    <div class="bg-white dark:bg-slate-800 p-3 rounded-xl shadow-md inline-block border-2 border-emerald-100">
+      <span class="text-gray-600 dark:text-gray-300 text-sm" id="time-label">⏱️ الوقت المتبقي:</span>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mx-auto mb-3 no-print">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">4</div>
+        <div class="stat-label" id="st-papers">أوراق امتحانية</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="total-questions-count">60</div>
+        <div class="stat-label" id="st-questions">سؤال</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="answered-count">0</div>
+        <div class="stat-label" id="st-answered">مُجاب</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">M/J 2015</div>
+        <div class="stat-label" id="st-session">الدورة</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mx-auto mb-3 flex flex-wrap gap-2 justify-center no-print">
+    <button onclick="toggleAllAnswers()" class="btn-action bg-emerald-600 hover:bg-emerald-700 text-white" id="btn-toggle">👁️ إظهار/إخفاء الإجابات</button>
+    <button onclick="window.print()" class="btn-action bg-gray-800 hover:bg-gray-900 text-white" id="btn-print">🖨️ طباعة</button>
+    <button onclick="expandAll()" class="btn-action bg-teal-600 hover:bg-teal-700 text-white" id="btn-expand">📂 فتح الكل</button>
+    <button onclick="collapseAll()" class="btn-action bg-amber-600 hover:bg-amber-700 text-white" id="btn-collapse">📁 طي الكل</button>
+    <button onclick="exportData()" class="btn-action bg-blue-600 hover:bg-blue-700 text-white" id="btn-export">💾 تصدير</button>
+    <button onclick="confirmReset()" class="btn-action bg-red-600 hover:bg-red-700 text-white" id="btn-reset">🔄 إعادة تعيين</button>
+  </div>
+
+  <header class="max-w-4xl mx-auto bg-white dark:bg-slate-800 p-4 rounded-xl shadow-md mb-4 border-r-4 border-emerald-600">
+    <div class="text-center">
+      <h1 class="text-lg md:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1" id="h-title">📐 امتحان Cambridge IGCSE Mathematics (0580) — مايو/يونيو 2015</h1>
+      <h2 class="text-sm text-emerald-600 font-semibold" id="h-sub">جميع الأوراق (الأساسي والمتقدم)</h2>
+      <p class="text-xs text-gray-600 dark:text-gray-400 mt-1" id="h-papers">Papers 1, 3 (أساسي), 2, 4 (متقدم)</p>
+      <p class="text-xs text-orange-600 mt-1 font-semibold" id="h-warn">⚠️ 4 أوراق امتحانية — نسخ متعددة — مع الرسومات التوضيحية</p>
+    </div>
+    <div class="mt-3 flex flex-wrap justify-center gap-3 text-xs text-gray-600 dark:text-gray-400">
+      <span>👤 <input type="text" id="studentName" class="border-b border-gray-400 bg-transparent w-24 text-center dark:text-gray-100" placeholder="الاسم" oninput="saveStudentInfo()"></span>
+      <span>🏫 <input type="text" id="studentClass" class="border-b border-gray-400 bg-transparent w-20 text-center dark:text-gray-100" placeholder="الشعبة" oninput="saveStudentInfo()"></span>
+      <span>📅 <input type="text" id="examDate" class="border-b border-gray-400 bg-transparent w-20 text-center dark:text-gray-100" placeholder="التاريخ" oninput="saveStudentInfo()"></span>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto space-y-4" id="exam-content"></main>
+
+  <div class="text-center no-print pb-4 mt-4">
+    <button onclick="gradeExam()" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-base px-8 py-3 rounded-xl font-bold shadow-xl transition transform hover:scale-105 cursor-pointer" id="btn-submit">
+      📝 تسليم وتصحيح الامتحان
+    </button>
+  </div>
+
+  <div id="results-panel" class="max-w-4xl mx-auto mt-4 bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-2xl border-t-4 border-emerald-500 hidden no-print">
+    <h2 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-3 text-center" id="res-title">📊 نتائج الامتحان</h2>
+    <div class="grid md:grid-cols-3 gap-3 mb-3">
+      <div class="bg-blue-50 dark:bg-blue-900/30 p-3 rounded-xl text-center">
+        <p class="text-xs dark:text-gray-300" id="rl-name">اسم الطالب</p>
+        <p id="res-name" class="font-bold text-lg text-indigo-700 dark:text-indigo-300">-</p>
+      </div>
+      <div class="bg-purple-50 dark:bg-purple-900/30 p-3 rounded-xl text-center">
+        <p class="text-xs dark:text-gray-300" id="rl-date">التاريخ</p>
+        <p id="res-date" class="font-bold text-lg text-purple-700 dark:text-purple-300">-</p>
+      </div>
+      <div class="bg-emerald-50 dark:bg-emerald-900/30 p-3 rounded-xl text-center">
+        <p class="text-xs dark:text-gray-300" id="rl-total">المجموع</p>
+        <p id="res-total" class="font-bold text-xl text-emerald-600">0/0</p>
+      </div>
+    </div>
+    <div class="text-center mb-3">
+      <span id="success-badge" class="success-badge grade-excellent">-</span>
+      <p id="success-percent" class="text-2xl font-bold text-emerald-600 mt-1">0%</p>
+      <p class="text-xs text-gray-500 dark:text-gray-400" id="rl-rate">نسبة النجاح</p>
+    </div>
+    <div class="bg-gray-50 dark:bg-slate-900 p-4 rounded-xl mb-3">
+      <h3 class="font-bold text-sm mb-2 text-gray-800 dark:text-gray-200" id="rl-perf">📈 تفصيل الأداء حسب الورقة:</h3>
+      <div class="grid md:grid-cols-2 gap-x-6 gap-y-2" id="paper-scores"></div>
+    </div>
+    <div class="flex gap-3 justify-center flex-wrap">
+      <button onclick="window.print()" class="bg-gray-700 text-white px-4 py-2 rounded-lg text-xs font-semibold cursor-pointer" id="btn-printres">🖨️ طباعة النتائج</button>
+      <button onclick="shareResults()" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-xs font-semibold cursor-pointer" id="btn-share">📤 مشاركة</button>
+    </div>
+  </div>
+
+  <footer class="max-w-4xl mx-auto mt-6 mb-4 text-center text-gray-500 dark:text-gray-400 text-xs no-print">
+    © Cambridge IGCSE Mathematics (0580) — May/June 2015 | Mr. Mohammed Hesham
+  </footer>
+</div>
+
+<div class="floating-nav no-print">
+  <button onclick="navigateQuestion(-1)" class="floating-btn secondary" title="السؤال السابق">⬅️</button>
+  <button onclick="navigateQuestion(1)" class="floating-btn secondary" title="السؤال التالي">➡️</button>
+</div>
+
+<div class="modal-backdrop" id="resetModal">
+  <div class="modal-content">
+    <h3 class="text-lg font-bold mb-3" id="modal-title">⚠️ تأكيد إعادة التعيين</h3>
+    <p class="text-sm mb-4 dark:text-gray-300" id="modal-message">سيتم حذف جميع إجاباتك. هل أنت متأكد؟</p>
+    <div class="flex gap-3 justify-end">
+      <button onclick="closeModal()" class="btn-action bg-gray-300 dark:bg-slate-700 text-gray-800 dark:text-gray-200">إلغاء</button>
+      <button onclick="resetExam()" class="btn-action bg-red-600 text-white">نعم، احذف</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let currentLang = 'ar';
+let answersVisible = false;
+let timeRemaining = 7 * 60 * 60;
+let timerInterval = null;
+let timerRunning = true;
+let currentQuestionIndex = 0;
+let allQuestions = [];
+
+const STORAGE_KEY = 'igcse_math_0580_mj2015';
+
+const SVG_FIGURES = {
+mj15p1q11: `<div class="svg-figure"><svg viewBox="0 0 280 200" width="270"><circle cx="140" cy="100" r="70" fill="none" stroke="#2563eb" stroke-width="2"/><line x1="140" y1="100" x2="210" y2="100" stroke="#dc2626" stroke-width="1.5"/><line x1="140" y1="100" x2="140" y2="30" stroke="#dc2626" stroke-width="1.5"/><path d="M 140 30 A 70 70 0 0 1 210 100" fill="#dbeafe" fill-opacity="0.3" stroke="#2563eb" stroke-width="2"/><circle cx="140" cy="100" r="2.5" fill="#111"/><text x="145" y="95" font-size="11">O</text><text x="215" y="105" font-size="12">A</text><text x="135" y="25" font-size="12">B</text><text x="175" y="65" font-size="10" fill="#dc2626">1.2 rad</text></svg><div class="svg-caption" data-cap-ar="س11: قطاع دائري زاويته 1.2 راديان ونصف قطره 7 سم" data-cap-en="Q11: Sector with angle 1.2 rad and radius 7cm">س11: قطاع دائري زاويته 1.2 راديان ونصف قطره 7 سم</div></div>`,
+mj15p2q14: `<div class="svg-figure"><svg viewBox="0 0 300 220" width="290"><polygon points="60,180 240,180 200,60 100,60" fill="#dbeafe" fill-opacity="0.2" stroke="#2563eb" stroke-width="2"/><line x1="60" y1="180" x2="200" y2="60" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,2"/><text x="45" y="195" font-size="12">A</text><text x="245" y="195" font-size="12">B</text><text x="205" y="55" font-size="12">C</text><text x="85" y="55" font-size="12">D</text><text x="130" y="110" font-size="9" fill="#dc2626">AC</text></svg><div class="svg-caption" data-cap-ar="س14: شبه منحرف ABCD وقطره AC" data-cap-en="Q14: Trapezium ABCD with diagonal AC">س14: شبه منحرف ABCD وقطره AC</div></div>`,
+mj15p3q6: `<div class="svg-figure"><svg viewBox="0 0 320 180" width="310"><polygon points="40,140 280,140 220,40 80,40" fill="#dbeafe" fill-opacity="0.2" stroke="#2563eb" stroke-width="2"/><line x1="80" y1="40" x2="220" y2="140" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,2"/><text x="25" y="155" font-size="12">A</text><text x="285" y="155" font-size="12">B</text><text x="225" y="35" font-size="12">C</text><text x="65" y="35" font-size="12">D</text><text x="130" y="100" font-size="9" fill="#dc2626">AC</text></svg><div class="svg-caption" data-cap-ar="س6: شبه منحرف ABCD وقطره AC" data-cap-en="Q6: Trapezium ABCD with diagonal AC">س6: شبه منحرف ABCD وقطره AC</div></div>`,
+mj15p4q5: `<div class="svg-figure"><svg viewBox="0 0 300 220" width="290"><polygon points="60,180 240,180 200,60 100,60" fill="#dbeafe" fill-opacity="0.2" stroke="#2563eb" stroke-width="2"/><line x1="150" y1="180" x2="150" y2="20" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,3"/><circle cx="150" cy="20" r="3" fill="#dc2626"/><text x="155" y="15" font-size="11">P</text><text x="45" y="195" font-size="12">A</text><text x="245" y="195" font-size="12">B</text><text x="205" y="55" font-size="12">C</text><text x="85" y="55" font-size="12">D</text><circle cx="150" cy="180" r="2.5" fill="#111"/><text x="155" y="175" font-size="11">M</text><text x="155" y="100" font-size="9" fill="#dc2626">Height</text></svg><div class="svg-caption" data-cap-ar="س5: هرم قاعدته مستطيلة ABCD ورأسه P" data-cap-en="Q5: Rectangular-based pyramid ABCD with apex P">س5: هرم قاعدته مستطيلة ABCD ورأسه P</div></div>`
+};
+
+const T = {
+  time_label:{ar:'⏱️ الوقت المتبقي:',en:'⏱️ Time Remaining:'},
+  st_papers:{ar:'أوراق امتحانية',en:'Exam Papers'},
+  st_questions:{ar:'سؤال',en:'Questions'},
+  st_answered:{ar:'مُجاب',en:'Answered'},
+  st_session:{ar:'الدورة',en:'Session'},
+  btn_toggle:{ar:'👁️ إظهار/إخفاء الإجابات',en:'👁️ Show/Hide Answers'},
+  btn_print:{ar:'🖨️ طباعة',en:'🖨️ Print'},
+  btn_expand:{ar:'📂 فتح الكل',en:'📂 Expand All'},
+  btn_collapse:{ar:'📁 طي الكل',en:'📁 Collapse All'},
+  btn_submit:{ar:'📝 تسليم وتصحيح الامتحان',en:'📝 Submit & Grade Exam'},
+  btn_export:{ar:'💾 تصدير',en:'💾 Export'},
+  btn_reset:{ar:'🔄 إعادة تعيين',en:'🔄 Reset'},
+  btn_share:{ar:'📤 مشاركة',en:'📤 Share'},
+  h_title:{ar:'📐 امتحان Cambridge IGCSE Mathematics (0580) — مايو/يونيو 2015',en:'📐 Cambridge IGCSE Mathematics (0580) Exam — May/June 2015'},
+  h_sub:{ar:'جميع الأوراق (الأساسي والمتقدم)',en:'All Papers (Core & Extended)'},
+  h_papers:{ar:'Papers 1, 3 (أساسي), 2, 4 (متقدم)',en:'Papers 1, 3 (Core), 2, 4 (Extended)'},
+  h_warn:{ar:'⚠️ 4 أوراق امتحانية — نسخ متعددة — مع الرسومات التوضيحية',en:'⚠️ 4 Papers — Multiple Variants — with diagrams'},
+  ph_name:{ar:'الاسم',en:'Name'},
+  ph_class:{ar:'الشعبة',en:'Class'},
+  ph_date:{ar:'التاريخ',en:'Date'},
+  res_title:{ar:'📊 نتائج الامتحان',en:'📊 Exam Results'},
+  rl_name:{ar:'اسم الطالب',en:'Student Name'},
+  rl_date:{ar:'التاريخ',en:'Date'},
+  rl_total:{ar:'المجموع',en:'Total'},
+  rl_rate:{ar:'نسبة النجاح',en:'Success Rate'},
+  rl_perf:{ar:'📈 تفصيل الأداء حسب الورقة:',en:'📈 Performance by Paper:'},
+  btn_printres:{ar:'🖨️ طباعة النتائج',en:'🖨️ Print Results'},
+  sidebar_title:{ar:'📑 فهرس الأوراق',en:'📑 Papers Index'},
+  marks:{ar:'درجة',en:'marks'},
+  answer_ph:{ar:'اكتب الإجابة هنا...',en:'Type answer here...'},
+  q_word:{ar:'السؤال',en:'Question'},
+  questions_word:{ar:'سؤال',en:'Questions'},
+  grade_excellent:{ar:'ممتاز 🌟',en:'Excellent 🌟'},
+  grade_good:{ar:'جيد جداً 👍',en:'Very Good 👍'},
+  grade_pass:{ar:'جيد ✓',en:'Good ✓'},
+  grade_fail:{ar:'يحتاج تحسين 📚',en:'Needs Improvement 📚'},
+  timeup:{ar:'انتهى الوقت!',en:"Time's up!"},
+  student_default:{ar:'طالب',en:'Student'},
+  core:{ar:'أساسي',en:'Core'},
+  extended:{ar:'متقدم',en:'Extended'},
+  reset_title:{ar:'⚠️ تأكيد إعادة التعيين',en:'⚠️ Confirm Reset'},
+  reset_message:{ar:'سيتم حذف جميع إجاباتك. هل أنت متأكد؟',en:'All your answers will be deleted. Are you sure?'},
+  reset_success:{ar:'✅ تم إعادة التعيين بنجاح',en:'✅ Reset successful'},
+  save_success:{ar:'💾 تم الحفظ تلقائياً',en:'💾 Saved automatically'},
+  export_success:{ar:'💾 تم التصدير بنجاح',en:'💾 Exported successfully'},
+  copy_success:{ar:'📋 تم النسخ!',en:'📋 Copied!'}
+};
+
+const examData = [
+  /* ═══════ PAPER 1 (CORE) — V11, V12 Combined ═══════ */
+  {id:'p1',title:{ar:'📘 الورقة 1 (أساسي)',en:'📘 Paper 1 (Core)'},tier:'core',color:'#2563eb',code:{ar:'الورقة 1 — مايو/يونيو 2015 — ساعة واحدة — 56 درجة',en:'Paper 1 — May/June 2015 — 1 hour — 56 marks'},questions:[
+    // Variant 11
+    {q:{ar:'[V11] اكتب العدد 0.0045 بالصيغة العلمية.',en:'[V11] Write 0.0045 in standard form.'},m:1,a:'4.5*10^-3',variant:'V11',e:{ar:'4.5 × 10⁻³',en:'4.5 × 10⁻³'}},
+    {q:{ar:'[V11] رتب الأعداد: 0.43, 9/4, 41%.',en:'[V11] Order: 0.43, 9/4, 41%.'},m:1,a:'41%,0.43,9/4',variant:'V11',e:{ar:'41% < 0.43 < 9/4',en:'41% < 0.43 < 9/4'}},
+    {q:{ar:'[V11] في مجموعة من 35 طالباً، 14 يذهبون بالحافلة. ما احتمال أن يختار الطالب عشوائياً لا يذهب بالحافلة؟',en:'[V11] In a group of 35 students, 14 go by bus. Prob not going by bus?'},m:2,a:'21/35',variant:'V11',e:{ar:'21/35 أو 3/5',en:'21/35 or 3/5'}},
+    {q:{ar:'[V11] اكتب معادلة الخط المستقيم الموازي لـ y = 4x + 1 ويمر بالنقطة (0, −3).',en:'[V11] Equation of line parallel to y = 4x + 1 through (0, −3).'},m:2,a:'y=4x-3',variant:'V11',e:{ar:'y = 4x − 3',en:'y = 4x − 3'}},
+    {q:{ar:'[V11] زاوية اتجاه P من M هي 107°. ما هي زاوية اتجاه M من P؟',en:'[V11] Bearing of P from M is 107°. Bearing of M from P?'},m:2,a:'287',variant:'V11',e:{ar:'287°',en:'287°'}},
+    {q:{ar:'[V11] الساعة 07:00 كانت الحرارة −2°C. (أ) كانت أعلى بـ 5°C من الساعة 04:00، ما حرارتها آنذاك؟ (ب) الساعة 10:00 أصبحت 11°C، كم زاد مقدار الحرارة؟',en:'[V11] At 07:00 temp −2°C. (a) Was 5°C higher at 04:00. (b) At 10:00 became 11°C, how much increase?'},m:2,a:'-7,13',variant:'V11',e:{ar:'(أ) −7°C | (ب) زاد 13°C',en:'(a) −7°C | (b) Rose 13°C'}},
+    {q:{ar:'[V11] انخفض سعر سيارة من $17,000 إلى $15,300. احسب نسبة التخفيض من السعر الأصلي.',en:'[V11] Car price dropped from $17,000 to $15,300. % decrease from original price.'},m:2,a:'10%',variant:'V11',e:{ar:'10%',en:'10%'}},
+    {q:{ar:'[V11] أضلاع مثلث هي x, (x+3), (2x−7) ومحيطها 52 سم. (أ) اكتب معادلة بدلالة x. (ب) أوجد قيمة x.',en:'[V11] Triangle sides x, (x+3), (2x−7), perimeter 52 cm. (a) Equation in terms of x. (b) Find x.'},m:3,a:'4x-4=52,14',variant:'V11',e:{ar:'(أ) 4x − 4 = 52 | (ب) x = 14',en:'(a) 4x − 4 = 52 | (b) x = 14'}},
+    {q:{ar:'[V11] مساحة دائرة 19.7 cm². احسب نصف قطرها.',en:'[V11] Circle area 19.7 cm². Calculate radius.'},m:3,a:'2.5',variant:'V11',e:{ar:'2.5 سم',en:'2.5 cm'}},
+    {q:{ar:'[V11] بسّط: (أ) p³ × p⁴ (ب) 12q³ ÷ 3q⁸.',en:'[V11] Simplify: (a) p³ × p⁴ (b) 12q³ ÷ 3q⁸.'},m:3,a:'p^7,4/q^5',variant:'V11',e:{ar:'(أ) p⁷ | (ب) 4/q⁵',en:'(a) p⁷ | (b) 4/q⁵'}},
+    {q:{ar:'[V11] زاوية داخلية لمضلع منتظم 160°. كم عدد أضلاعه؟',en:'[V11] Interior angle of regular polygon 160°. Number of sides?'},m:3,a:'18',variant:'V11',e:{ar:'18 ضلعاً',en:'18 sides'}},
+    {q:{ar:'[V11] أوجد قيمة: (أ) 10⁻² (ب) 4⁰ (ج) ∛343.',en:'[V11] Find: (a) 10⁻² (b) 4⁰ (c) ∛343.'},m:3,a:'0.01,1,7',variant:'V11',e:{ar:'(أ) 0.01 | (ب) 1 | (ج) 7',en:'(a) 0.01 | (b) 1 | (c) 7'}},
+    {q:{ar:'[V11] حل المعادلتين آنياً: 2x − y = 9 و 7x + 2y = 26.',en:'[V11] Solve simultaneously: 2x − y = 9 and 7x + 2y = 26.'},m:3,a:'4,1',variant:'V11',e:{ar:'x = 4, y = 1',en:'x = 4, y = 1'}},
+    {q:{ar:'[V11] A, B, C على دائرة مركزها O، BC قطر، SCT مماس عند C. الزاوية ACB = 54°. أوجد: (أ) BCT (ب) COA (ج) CAB (د) ABC.',en:'[V11] A, B, C on circle centre O, BC diameter, SCT tangent at C. Angle ACB = 54°. Find: (a) BCT (b) COA (c) CAB (d) ABC.'},m:4,a:'36,108,36,36',variant:'V11',e:{ar:'BCT=36°, COA=108°, CAB=36°, ABC=36°',en:'BCT=36°, COA=108°, CAB=36°, ABC=36°'}},
+    {q:{ar:'[V11] المتجهات d, e, f. احسب: (أ) d − e (ب) 4f.',en:'[V11] Vectors d, e, f. Calculate: (a) d − e (b) 4f.'},m:4,a:'depends',variant:'V11',e:{ar:'يعتمد على الرسم',en:'Depends on diagram'}},
+    {q:{ar:'[V11] أكمل جدولاً يوضح عدد خطوط التماثل ورتبة التماثل الدوراني لأشكال معينة.',en:'[V11] Complete table of lines of symmetry and rotational symmetry order for shapes.'},m:4,a:'depends',variant:'V11',e:{ar:'يعتمد على الأشكال',en:'Depends on shapes'}},
+    {q:{ar:'[V11] رسم بياني لمسافة حافلة. (أ) احسب متوسط السرعة (كم/دقيقة وكم/ساعة). (ب) تنتظر 20 دقيقة ثم تعود بسرعة 12 كم/س، أكمل الرسم البياني.',en:'[V11] Bus distance graph. (a) Average speed (km/min and km/h). (b) Waits 20 min then returns at 12 km/h, complete graph.'},m:4,a:'depends',variant:'V11',e:{ar:'من الرسم البياني',en:'From graph'}},
+    {q:{ar:'[V11] (أ) حلل 3y² − 7xy. (ب) فك الأقواس 4p(5p + r) + 2r(6p + r).',en:'[V11] (a) Factorise 3y² − 7xy. (b) Expand 4p(5p + r) + 2r(6p + r).'},m:4,a:'y(3y-7x),20p^2+4pr+2r^2',variant:'V11',e:{ar:'(أ) y(3y−7x) | (ب) 20p²+4pr+2r²',en:'(a) y(3y−7x) | (b) 20p²+4pr+2r²'}},
+    {q:{ar:'[V11] غرفة 3m × 2.5m تُبطن ببلاط مربع 25cm. (أ) كم بلاطة على الطول والكل؟ (ب) مساحة البلاطة بـ cm² و m².',en:'[V11] Room 3m × 2.5m tiled with 25cm square tiles. (a) How many tiles along length and total? (b) Tile area in cm² and m².'},m:5,a:'12,120,625,0.0625',variant:'V11',e:{ar:'(أ) 12 و 120 | (ب) 625 سم² و 0.0625 م²',en:'(a) 12 and 120 | (b) 625 cm² and 0.0625 m²'}},
+    // Variant 12
+    {q:{ar:'[V12] في الشكل، زوايا مثلث أو خطوط 157°, 84°, x°. أوجد x.',en:'[V12] In shape, angles 157°, 84°, x°. Find x.'},m:1,a:'73',variant:'V12',e:{ar:'x = 73°',en:'x = 73°'}},
+    {q:{ar:'[V12] قطار يغادر 06:30 والرحلة 3 ساعات و56 دقيقة. متى يصل؟',en:'[V12] Train leaves 06:30, journey 3 hours 56 minutes. Arrival time?'},m:1,a:'10:26',variant:'V12',e:{ar:'10:26',en:'10:26'}},
+    {q:{ar:'[V12] اكتب عوامل العدد 48 التي تقع بين 10 و 40.',en:'[V12] Factors of 48 between 10 and 40.'},m:2,a:'12,16,24',variant:'V12',e:{ar:'12, 16, 24',en:'12, 16, 24'}},
+    {q:{ar:'[V12] اختر الرمز (<, >, =): (أ) 9/5 … 0.55 (ب) 66% … 2/3.',en:'[V12] Choose symbol (<, >, =): (a) 9/5 … 0.55 (b) 66% … 2/3.'},m:2,a:'>,=',variant:'V12',e:{ar:'(أ) > | (ب) =',en:'(a) > | (b) ='}},
+    {q:{ar:'[V12] انخفض قارب من $21,000 إلى $16,800. احسب نسبة التخفيض.',en:'[V12] Boat dropped from $21,000 to $16,800. % decrease.'},m:2,a:'20%',variant:'V12',e:{ar:'20%',en:'20%'}},
+    {q:{ar:'[V12] معادلة الخط الموازي لـ y = 3x + 5 ويمر بـ (0, −2).',en:'[V12] Line parallel to y = 3x + 5 through (0, −2).'},m:2,a:'y=3x-2',variant:'V12',e:{ar:'y = 3x − 2',en:'y = 3x − 2'}},
+    {q:{ar:'[V12] 1 لتر آيس كريم، أكل 1/8 والأطفال 3/5. ما الكسر المتبقي؟',en:'[V12] 1L ice cream, ate 1/8 and kids 3/5. Fraction remaining?'},m:2,a:'17/40',variant:'V12',e:{ar:'17/40',en:'17/40'}},
+    {q:{ar:'[V12] احسب 27.4 × (3.28 + 1.6 × 9.8). (أ) اكتب ما يظهر بالآلة. (ب) قرب لـ 3 أرقام معنوية.',en:'[V12] Calc 27.4 × (3.28 + 1.6 × 9.8). (a) Calculator display. (b) Round to 3 sig figs.'},m:2,a:'518.012,518',variant:'V12',e:{ar:'(أ) 518.012 | (ب) 518',en:'(a) 518.012 | (b) 518'}},
+    {q:{ar:'[V12] احسب مساحة دائرة نصف قطرها 3.75 cm.',en:'[V12] Circle area radius 3.75 cm.'},m:2,a:'44.2',variant:'V12',e:{ar:'44.2 سم²',en:'44.2 cm²'}},
+    {q:{ar:'[V12] (أ) رتبة التماثل الدوراني لشكل. (ب) من الحروف A, M, N, O, T, X، أيها يمتلك خط تماثل واحد فقط؟',en:'[V12] (a) Rotational symmetry order. (b) From letters A, M, N, O, T, X, which has 1 line of symmetry only?'},m:3,a:'depends,A or M or T',variant:'V12',e:{ar:'يعتمد على الشكل | A أو M أو T',en:'Depends on shape | A or M or T'}},
+    {q:{ar:'[V12] بسّط: (أ) m⁻³ × m⁵ (ب) 15k² ÷ 8k³.',en:'[V12] Simplify: (a) m⁻³ × m⁵ (b) 15k² ÷ 8k³.'},m:3,a:'m^2,15/(8k)',variant:'V12',e:{ar:'(أ) m² | (ب) 15/(8k)',en:'(a) m² | (b) 15/(8k)'}},
+    {q:{ar:'[V12] زاوية داخلية لمضلع منتظم 150°. كم عدد أضلاعه؟',en:'[V12] Interior angle of regular polygon 150°. Number of sides?'},m:3,a:'12',variant:'V12',e:{ar:'12 ضلعاً',en:'12 sides'}},
+    {q:{ar:'[V12] فك الأقواس: (أ) 5(3 − 4h) (ب) 2d(4d² + 6e).',en:'[V12] Expand: (a) 5(3 − 4h) (b) 2d(4d² + 6e).'},m:3,a:'15-20h,8d^3+12de',variant:'V12',e:{ar:'(أ) 15−20h | (ب) 8d³+12de',en:'(a) 15−20h | (b) 8d³+12de'}},
+    {q:{ar:'[V12] متوازي مستطيلات 4 × 2.3 × 1.75 سم. احسب حجمه بـ cm³ و mm³.',en:'[V12] Cuboid 4 × 2.3 × 1.75 cm. Volume in cm³ and mm³.'},m:3,a:'16.1,16100',variant:'V12',e:{ar:'16.1 سم³، 16,100 مم³',en:'16.1 cm³, 16,100 mm³'}},
+    {q:{ar:'[V12] بسّط: (أ) 6r + 2s + s − 4r (ب) 4f² − 3g + 4g − 9f².',en:'[V12] Simplify: (a) 6r + 2s + s − 4r (b) 4f² − 3g + 4g − 9f².'},m:3,a:'2r+3s,-5f^2+g',variant:'V12',e:{ar:'(أ) 2r+3s | (ب) −5f²+g',en:'(a) 2r+3s | (b) −5f²+g'}},
+    {q:{ar:'[V12] أسطوانة (علبة) ارتفاعها 11 ونصف قطرها 4. احسب مساحة الملصق الجانبي.',en:'[V12] Cylinder height 11, radius 4. Curved surface area.'},m:3,a:'276.5',variant:'V12',e:{ar:'276.5 سم²',en:'276.5 cm²'}},
+    {q:{ar:'[V12] حل المعادلتين: 3x + y = 19 و 5x − y = 13.',en:'[V12] Solve: 3x + y = 19 and 5x − y = 13.'},m:3,a:'4,7',variant:'V12',e:{ar:'x = 4, y = 7',en:'x = 4, y = 7'}},
+    {q:{ar:'[V12] دائرة مركزها O، PR قطر، الزاوية OQR = 55°. أوجد: PQR, ROQ, OPQ.',en:'[V12] Circle centre O, PR diameter, angle OQR = 55°. Find: PQR, ROQ, OPQ.'},m:3,a:'90,110,35',variant:'V12',e:{ar:'PQR=90°, ROQ=110°, OPQ=35°',en:'PQR=90°, ROQ=110°, OPQ=35°'}},
+    {q:{ar:'[V12] المتجهات f, g, h. احسب: (أ) 3f (ب) g − h.',en:'[V12] Vectors f, g, h. Calculate: (a) 3f (b) g − h.'},m:4,a:'depends',variant:'V12',e:{ar:'يعتمد على الرسم',en:'Depends on diagram'}},
+    {q:{ar:'[V12] رسم بياني لشاحنة. (أ) متوسط السرعة. (ب) مدة التوقف. (ج) أكمل الرسم لرحلة العودة.',en:'[V12] Truck graph. (a) Average speed. (b) Stop duration. (c) Complete return graph.'},m:4,a:'depends',variant:'V12',e:{ar:'من الرسم البياني',en:'From graph'}},
+    {q:{ar:'[V12] رباعي ABCD، AB=16, BD=9, ∠BDC=24°، والزاويتان ADB و BCD قائمتان. أوجد طولي AD و CD.',en:'[V12] Quad ABCD, AB=16, BD=9, ∠BDC=24°, angles ADB and BCD are right. Find AD and CD.'},m:5,a:'12,4',variant:'V12',e:{ar:'AD=12, CD=4',en:'AD=12, CD=4'}}
+  ]},
+  
+  /* ═══════ PAPER 2 (EXTENDED) — V21, V22 Combined ═══════ */
+  {id:'p2',title:{ar:'📕 الورقة 2 (متقدم)',en:'📕 Paper 2 (Extended)'},tier:'extended',color:'#dc2626',code:{ar:'الورقة 2 — مايو/يونيو 2015 — ساعة ونصف — 70 درجة',en:'Paper 2 — May/June 2015 — 1.5 hours — 70 marks'},questions:[
+    // Variant 21
+    {q:{ar:'[V21] رتب من الأصغر: π, 22/7, 3.14, 10/3.',en:'[V21] Order smallest: π, 22/7, 3.14, 10/3.'},m:2,a:'3.14,pi,22/7,10/3',variant:'V21',e:{ar:'3.14 < π < 22/7 < 10/3',en:'3.14 < π < 22/7 < 10/3'}},
+    {q:{ar:'[V21] حول $600 إلى جنيه (£) بسعر 1.40$، ثم أعدها لدولار بسعر 2.60. كم حصل؟',en:'[V21] Convert $600 to £ at 1.40$, then back to $ at 2.60. How much?'},m:2,a:'1114.29',variant:'V21',e:{ar:'$1114.29',en:'$1114.29'}},
+    {q:{ar:'[V21] p أكبر عدد أولي بين 50 و 100، و q أصغره. احسب p − q.',en:'[V21] p largest prime 50-100, q smallest. Calculate p − q.'},m:2,a:'44',variant:'V21',e:{ar:'44 (97 − 53)',en:'44 (97 − 53)'}},
+    {q:{ar:'[V21] سيارة سرعتها 108 km/h، مرت بمبنى في ثانية واحدة. ما طول المبنى بالأمتار؟',en:'[V21] Car speed 108 km/h, passed building in 1 second. Length in meters?'},m:2,a:'30',variant:'V21',e:{ar:'30 م',en:'30 m'}},
+    {q:{ar:'[V21] احسب 5(6×10³ + 400) واكتبها بالصيغة العلمية.',en:'[V21] Calc 5(6×10³ + 400) in std form.'},m:2,a:'3.2*10^4',variant:'V21',e:{ar:'3.2 × 10⁴',en:'3.2 × 10⁴'}},
+    {q:{ar:'[V21] احسب قيمة المقدار المعطى بالآلة الحاسبة (كسور وجذور)، واكتبه مقرباً لـ 4 أرقام معنوية.',en:'[V21] Calc expression (fractions/roots) to 4 sig figs.'},m:2,a:'depends',variant:'V21',e:{ar:'يعتمد على المقدار',en:'Depends on expression'}},
+    {q:{ar:'[V21] سطح مكتب مستطيل 0.8 × 1.4 م ومعه ربع دائرة. احسب المساحة الكلية.',en:'[V21] Desk 0.8 × 1.4 m with quarter circle. Total area.'},m:3,a:'1.25',variant:'V21',e:{ar:'1.25 م²',en:'1.25 m²'}},
+    {q:{ar:'[V21] ظلل مربعاً لتحقيق (i) خط تماثل واحد (ii) تماثل دوراني من الرتبة 2. كم مستوى تماثل لهرم رباعي؟',en:'[V21] Shade square for (i) 1 line sym (ii) rot sym order 2. Planes of symmetry for square pyramid?'},m:3,a:'1,2,4',variant:'V21',e:{ar:'(i) 1 | (ii) 2 | 4 مستويات',en:'(i) 1 | (ii) 2 | 4 planes'}},
+    {q:{ar:'[V21] دراجة غادرت الأربعاء 21 مايو 09:45، الرحلة 97 ساعة. متى وصلت (اليوم، التاريخ، الوقت)؟',en:'[V21] Bike left Wed 21 May 09:45, journey 97 hours. Arrival (day, date, time)?'},m:3,a:'Sat 25 May 10:45',variant:'V21',e:{ar:'السبت 25 مايو 10:45',en:'Saturday 25 May 10:45'}},
+    {q:{ar:'[V21] بوابة 1.5 × 3.5 م من 8 قطع خشب. احسب الطول الإجمالي للخشب.',en:'[V21] Gate 1.5 × 3.5 m from 8 wood pieces. Total wood length.'},m:3,a:'28',variant:'V21',e:{ar:'28 م',en:'28 m'}},
+    {q:{ar:'[V21] اجعل d موضوعاً للصيغة w = 4d / (2c + 5d).',en:'[V21] Make d subject: w = 4d / (2c + 5d).'},m:3,a:'2cw/(4-5w)',variant:'V21',e:{ar:'d = 2cw / (4 − 5w)',en:'d = 2cw / (4 − 5w)'}},
+    {q:{ar:'[V21] مخطط فين لمجموعات Q, R, P حيث 15 ∈ P, n(P) = 1, P ∩ Q = ∅. أكمل المخطط.',en:'[V21] Venn diagram Q, R, P where 15 ∈ P, n(P) = 1, P ∩ Q = ∅. Complete diagram.'},m:3,a:'shown',variant:'V21',e:{ar:'يعتمد على الرسم',en:'Depends on diagram'}},
+    {q:{ar:'[V21] حل المعادلتين: x/2 + y/7 = 2 و x/2 − y/7 = 17.',en:'[V21] Solve: x/2 + y/7 = 2 and x/2 − y/7 = 17.'},m:3,a:'19,-10.5',variant:'V21',e:{ar:'x = 19, y = −10.5',en:'x = 19, y = −10.5'}},
+    {q:{ar:'[V21] y يتناسب عكسياً مع x². عندما x = 8, y = 1.5. أوجد y عندما x = 5.',en:'[V21] y ∝ 1/x². When x = 8, y = 1.5. Find y when x = 5.'},m:3,a:'3.84',variant:'V21',e:{ar:'3.84',en:'3.84'}},
+    {q:{ar:'[V21] النقاط (2,5), (3,3), (k,1) على خط مستقيم. (أ) أوجد k. (ب) أوجد معادلة الخط.',en:'[V21] Points (2,5), (3,3), (k,1) collinear. (a) Find k. (b) Find line equation.'},m:4,a:'-1,y=-2x+9',variant:'V21',e:{ar:'k = −1, y = −2x + 9',en:'k = −1, y = −2x + 9'}},
+    {q:{ar:'[V21] بسّط: (أ) (0.75p⁴/16)^(1/2) (ب) 32q⁻³ ÷ 2³q⁻².',en:'[V21] Simplify: (a) (0.75p⁴/16)^(1/2) (b) 32q⁻³ ÷ 2³q⁻².'},m:4,a:'sqrt(3)p^2/4,4/q',variant:'V21',e:{ar:'(أ) √3 p²/4 | (ب) 4/q',en:'(a) √3 p²/4 | (b) 4/q'}},
+    {q:{ar:'[V21] دائرة AB قطر، EC ∥ AB و OD ⊥ EC. الزاوية DOC = 38°. أوجد: BOC, CBO, EDO.',en:'[V21] Circle AB diameter, EC ∥ AB, OD ⊥ EC. Angle DOC = 38°. Find: BOC, CBO, EDO.'},m:4,a:'76,52,52',variant:'V21',e:{ar:'BOC=76°, CBO=52°, EDO=52°',en:'BOC=76°, CBO=52°, EDO=52°'}},
+    {q:{ar:'[V21] في شبكة مثلثات، اكتب أحرف المثلثات (أ) المطابقة للمظللة (ب) المشابهة وليست مطابقة.',en:'[V21] In triangle grid, write letters of triangles (a) congruent to shaded (b) similar not congruent.'},m:4,a:'depends',variant:'V21',e:{ar:'يعتمد على الشبكة',en:'Depends on grid'}},
+    {q:{ar:'[V21] المتجه r = 2p + t(p + q). أكمل جدولاً لقيم t، ارسم النقاط، ماذا تستنتج عنها؟',en:'[V21] Vector r = 2p + t(p + q). Complete table for t values, plot points, conclusion?'},m:6,a:'Collinear',variant:'V21',e:{ar:'النقاط على استقامة واحدة',en:'Points are collinear'}},
+    {q:{ar:'[V21] الدوال f(x) = (x−1)³, g(x) = (x−1)², h(x) = 3x + 1. أوجد fg(−1), gh(x), f⁻¹(x).',en:'[V21] Functions f(x) = (x−1)³, g(x) = (x−1)², h(x) = 3x + 1. Find fg(−1), gh(x), f⁻¹(x).'},m:6,a:'-8,(3x)^2,(x-1)/3',variant:'V21',e:{ar:'fg(−1)=−8, gh(x)=(3x)², f⁻¹(x)=(x−1)/3',en:'fg(−1)=−8, gh(x)=(3x)², f⁻¹(x)=(x−1)/3'}},
+    {q:{ar:'[V21] مصفوفات أبعادها مختلفة. (أ) أي ضربين ممكنين؟ (ب) أوجد معكوس مصفوفة 2×2. (ج) لماذا لا توجد مصفوفة معكوسة لمصفوفة معينة؟',en:'[V21] Matrices different dimensions. (a) Which two products possible? (b) Inverse of 2×2 matrix. (c) Why no inverse for specific matrix?'},m:6,a:'depends',variant:'V21',e:{ar:'يعتمد على المصفوفات',en:'Depends on matrices'}},
+    // Variant 22
+    {q:{ar:'[V22] رتبة التماثل الدوراني وخطوط التماثل لشكل.',en:'[V22] Rotational symmetry order and lines of symmetry for shape.'},m:2,a:'depends',variant:'V22',e:{ar:'يعتمد على الشكل',en:'Depends on shape'}},
+    {q:{ar:'[V22] احسب 3sin120° − 4sin³120°.',en:'[V22] Calc 3sin120° − 4sin³120°.'},m:2,a:'0',variant:'V22',e:{ar:'0',en:'0'}},
+    {q:{ar:'[V22] رتب: 2/3, −3/2, −2/3, 3/2.',en:'[V22] Order: 2/3, −3/2, −2/3, 3/2.'},m:2,a:'-3/2,-2/3,2/3,3/2',variant:'V22',e:{ar:'−3/2 < −2/3 < 2/3 < 3/2',en:'−3/2 < −2/3 < 2/3 < 3/2'}},
+    {q:{ar:'[V22] اكتب 3/a + 5/4a ككسر واحد.',en:'[V22] Write 3/a + 5/4a as single fraction.'},m:2,a:'17/(4a)',variant:'V22',e:{ar:'17/(4a)',en:'17/(4a)'}},
+    {q:{ar:'[V22] 2⁸ × 8² × 4⁻² = 2ⁿ. أوجد n.',en:'[V22] 2⁸ × 8² × 4⁻² = 2ⁿ. Find n.'},m:2,a:'10',variant:'V22',e:{ar:'n = 10',en:'n = 10'}},
+    {q:{ar:'[V22] حول 64 m² إلى mm² بالصيغة العلمية.',en:'[V22] Convert 64 m² to mm² in std form.'},m:2,a:'6.4*10^7',variant:'V22',e:{ar:'6.4 × 10⁷',en:'6.4 × 10⁷'}},
+    {q:{ar:'[V22] ظلل المناطق المطلوبة في مخططات فين.',en:'[V22] Shade required regions in Venn diagrams.'},m:2,a:'shown',variant:'V22',e:{ar:'إنشاءات فين',en:'Venn constructions'}},
+    {q:{ar:'[V22] باستخدام رسوم y = sin x و y = cos x، حل sin x − cos x = 0 و = 0.5.',en:'[V22] Using graphs y = sin x and y = cos x, solve sin x − cos x = 0 and = 0.5.'},m:3,a:'45,225,157.5,337.5',variant:'V22',e:{ar:'45°, 225°, 157.5°, 337.5°',en:'45°, 225°, 157.5°, 337.5°'}},
+    {q:{ar:'[V22] سور من 32 قطعة طول كل منها 2 م (مقربة لأقرب سم). احسب الحد الأدنى (Lower bound) للطول الكلي.',en:'[V22] Fence 32 pieces each 2m (nearest cm). Lower bound total length.'},m:3,a:'63.84',variant:'V22',e:{ar:'63.84 م',en:'63.84 m'}},
+    {q:{ar:'[V22] اجعل x موضوعاً للصيغة P = x + 3/x.',en:'[V22] Make x subject: P = x + 3/x.'},m:4,a:'quadratic formula',variant:'V22',e:{ar:'باستخدام القانون العام',en:'Using quadratic formula'}},
+    {q:{ar:'[V22] دائرتان تمسان إحداهما الأخرى، ومماس مشترك. أوجد المسافة بين المركزين وطول المماس.',en:'[V22] Two touching circles, common tangent. Distance between centres and tangent length.'},m:4,a:'depends',variant:'V22',e:{ar:'يعتمد على الرسم',en:'Depends on diagram'}},
+    {q:{ar:'[V22] مصعد تزلج طوله 730 م وزاوية الارتفاع 37.1°. احسب الارتفاع h، والوقت بسرعة 3.65 m/s.',en:'[V22] Ski lift 730m, elevation 37.1°. Calculate height h, time at 3.65 m/s.'},m:4,a:'439.5,200',variant:'V22',e:{ar:'h ≈ 439.5 م, t ≈ 200 ث',en:'h ≈ 439.5 m, t ≈ 200 s'}},
+    {q:{ar:'[V22] المصفوفة M = (6 3; 4 5)(1 x; -1 2). أوجد M، ثم بسّط (x−1)M.',en:'[V22] Matrix M = (6 3; 4 5)(1 x; -1 2). Find M, simplify (x−1)M.'},m:4,a:'depends',variant:'V22',e:{ar:'يعتمد على الحساب',en:'Depends on calculation'}},
+    {q:{ar:'[V22] بتظليل المناطق غير المرغوبة، أوجد المنطقة R التي تحقق 4 متباينات.',en:'[V22] Shade unwanted regions, find region R satisfying 4 inequalities.'},m:4,a:'shown',variant:'V22',e:{ar:'تظليل المنطقة',en:'Shade region'}},
+    {q:{ar:'[V22] خطوط y = 4, 2x + y = 8, 3x + y = 18. أوجد نقاط التقاطع A,B، نقطة المنتصف M، ومعادلة خط يمر بـ M ويوازي 3x + y = 18.',en:'[V22] Lines y = 4, 2x + y = 8, 3x + y = 18. Find intersections A,B, midpoint M, line through M parallel to 3x + y = 18.'},m:5,a:'depends',variant:'V22',e:{ar:'من الحل الجبري',en:'From algebraic solution'}},
+    {q:{ar:'[V22] رسما سرعة لدراجتين (ألونسو وبوريس) قطعاً نفس المسافة في 16 ثانية. أوجد السرعة القصوى لبوريس.',en:'[V22] Speed graphs Alonso/Boris same distance 16s. Max speed Boris.'},m:5,a:'depends',variant:'V22',e:{ar:'من الرسم البياني',en:'From graph'}},
+    {q:{ar:'[V22] تقاطع 4 طرق ودائرة مركزية نصف قطرها 8 م. (أ) مساحة العشب. (ب) أقواس دوائر نصف قطرها 12 م وزاوية 45°. احسب الطول الكلي المطلي.',en:'[V22] Intersection 4 roads, central circle r=8m. (a) Grass area. (b) Arcs r=12m angle 45°. Painted length.'},m:6,a:'depends',variant:'V22',e:{ar:'من الحسابات',en:'From calculations'}},
+    {q:{ar:'[V22] الدوال f(x) = 1 − 2x, g(x) = 3x − 2, h(x) = x² − 5x − 11. أوجد f(−5), gf(x)، وحل h(x) = 0.',en:'[V22] Functions f(x) = 1 − 2x, g(x) = 3x − 2, h(x) = x² − 5x − 11. Find f(−5), gf(x), solve h(x) = 0.'},m:7,a:'11,3x^2-7x-13,depends',variant:'V22',e:{ar:'f(−5)=11, gf(x)=3x²−7x−13',en:'f(−5)=11, gf(x)=3x²−7x−13'}},
+    {q:{ar:'[V22] مسافة الفرملة d = v(v+40)/200. أكمل جدولاً، ارسم رسماً بيانياً، وأوجد المسافة عند سرعة 110 كم/س، والسرعة عند مسافة 80 م.',en:'[V22] Braking distance d = v(v+40)/200. Table, graph, distance at 110 km/h, speed at 80m.'},m:7,a:'depends',variant:'V22',e:{ar:'من الرسم البياني',en:'From graph'}}
+  ]},
+  
+  /* ═══════ PAPER 3 (CORE) — V31, V32 Combined ═══════ */
+  {id:'p3',title:{ar:'📗 الورقة 3 (أساسي)',en:'📗 Paper 3 (Core)'},tier:'core',color:'#065f46',code:{ar:'الورقة 3 — مايو/يونيو 2015 — ساعتان — 104 درجات',en:'Paper 3 — May/June 2015 — 2 hours — 104 marks'},questions:[
+    // Variant 31
+    {q:{ar:'[V31] تعداد قرية 2250. (أ) 32% أطفال. (ب) 360 فوق 60 سنة، نسبة الرجال للنساء 2:7. (ج) زيادة 18%. (د) صيغة علمية. (هـ) حد أدنى لتعداد 1770 مقرب لأقرب 10.',en:'[V31] Village pop 2250. (a) 32% children. (b) 360 over 60, men:women 2:7. (c) Increase 18%. (d) Std form. (e) Lower bound 1770 nearest 10.'},m:13,a:'720,280,2655,2.25*10^3,1765',variant:'V31',e:{ar:'720، 280، 2655، 2.25×10³، 1765',en:'720, 280, 2655, 2.25×10³, 1765'}},
+    {q:{ar:'[V31] منشور طوله 42 سم، مقطعه شبه منحرف AB=19, AD=10, DC=13, ∠ADC=90°. المحيط، المساحة، الحجم، والكتلة بالكيلوجرام (الكثافة 4 g/cm³).',en:'[V31] Prism length 42cm, trapezium cross-section AB=19, AD=10, DC=13, ∠ADC=90°. Perimeter, area, volume, mass in kg (density 4 g/cm³).'},m:10,a:'56.6,155,6510,26.04',variant:'V31',e:{ar:'المحيط≈56.6 سم، المساحة=155 سم²، الحجم=6510 سم³، الكتلة≈26.04 كجم',en:'Perimeter≈56.6 cm, Area=155 cm², Vol=6510 cm³, Mass≈26.04 kg'}},
+    {q:{ar:'[V31] 12 طالباً في اختبار. مخطط انتشار. (أ) نوع الارتباط. (ب) المدى والمتوسط للزمن. (ج) المنوال والوسيط للدرجات. (د) احتمالات.',en:'[V31] 12 students test. Scatter graph. (a) Correlation type. (b) Range and mean time. (c) Mode and median marks. (d) Probabilities.'},m:12,a:'depends',variant:'V31',e:{ar:'يعتمد على البيانات',en:'Depends on data'}},
+    {q:{ar:'[V31] مثلث ABC، الارتفاع AN=8.6، ∠BAN=29°, AC=13.4. احسب BN، الزاوية CAN، و NC.',en:'[V31] Triangle ABC, height AN=8.6, ∠BAN=29°, AC=13.4. Calculate BN, angle CAN, NC.'},m:8,a:'4.77,61,10.2',variant:'V31',e:{ar:'BN≈4.77، ∠CAN≈61°، NC≈10.2',en:'BN≈4.77, ∠CAN≈61°, NC≈10.2'}},
+    {q:{ar:'[V31] تحويلات هندسية على شبكة (إزاحة، تمدد، انعكاس). صِف التحويلات المفردة.',en:'[V31] Transformations on grid (translation, enlargement, reflection). Describe single transformations.'},m:10,a:'depends',variant:'V31',e:{ar:'يعتمد على الرسم',en:'Depends on diagram'}},
+    {q:{ar:'[V31] الجدول والرسم البياني لـ y = 3/x. حل 3/x = 7. ارسم y = 2x − 1 وأوجد نقاط التقاطع.',en:'[V31] Table and graph y = 3/x. Solve 3/x = 7. Draw y = 2x − 1 and find intersections.'},m:14,a:'depends',variant:'V31',e:{ar:'من الرسم البياني',en:'From graph'}},
+    {q:{ar:'[V31] الصيغة S = 4a + d. أوجد قيم S و d، واجعل d موضوعاً للصيغة.',en:'[V31] Formula S = 4a + d. Find values S and d, make d subject.'},m:6,a:'depends,d=S-4a',variant:'V31',e:{ar:'d = S − 4a',en:'d = S − 4a'}},
+    {q:{ar:'[V31] (أ) فائدة بسيطة $275 بنسبة 6% لـ 4 سنوات. (ب) فائدة مركبة لـ $650 بنسبة 4% لسنتين. (ج) تحويل عملات (يورو إلى جنيه، ويورو إلى دولار).',en:'[V31] (a) Simple interest $275 at 6% for 4 years. (b) Compound interest $650 at 4% for 2 years. (c) Currency conversion (euro to pound, euro to dollar).'},m:11,a:'66,703.04,depends',variant:'V31',e:{ar:'(أ) $66 | (ب) $703.04',en:'(a) $66 | (b) $703.04'}},
+    {q:{ar:'[V31] إنشاءات هندسية لمثلث (محال، منصفات، قياسات).',en:'[V31] Triangle constructions (loci, bisectors, measurements).'},m:9,a:'shown',variant:'V31',e:{ar:'إنشاءات هندسية',en:'Geometric constructions'}},
+    {q:{ar:'[V31] متتابعة أنماط مربعة. أوجد الارتفاع، العرض، وعدد المربعات بدلالة n.',en:'[V31] Square pattern sequence. Find height, width, number of squares in terms of n.'},m:11,a:'depends',variant:'V31',e:{ar:'يعتمد على النمط',en:'Depends on pattern'}},
+    // Variant 32
+    {q:{ar:'[V32] عوامل 36، العوامل المشتركة مع 90، الأعداد المربعة بين 20 و 50، وحل p³q = 56.',en:'[V32] Factors of 36, common factors with 90, square numbers 20-50, solve p³q = 56.'},m:10,a:'depends',variant:'V32',e:{ar:'يعتمد على الحسابات',en:'Depends on calculations'}},
+    {q:{ar:'[V32] دخل أسبوعي $150، يتبقى 132. نسبة الضريبة، توزيع بنسبة 15:7:11، كسر الإيجار، وزيادة 8%.',en:'[V32] Weekly income $150, remainder 132. Tax %, ratio 15:7:11, rent fraction, increase 8%.'},m:11,a:'depends',variant:'V32',e:{ar:'يعتمد على الحسابات',en:'Depends on calculations'}},
+    {q:{ar:'[V32] رحلة سيارة وقطار (رسم بياني للمسافة والزمن). حساب السرعات والأزمنة.',en:'[V32] Car and train journey (distance-time graph). Calculate speeds and times.'},m:11,a:'depends',variant:'V32',e:{ar:'من الرسم البياني',en:'From graph'}},
+    {q:{ar:'[V32] 40 مباراة كرة قدم. جدول تكرار، مدرج تكراري، مخطط دائري، واحتمالات.',en:'[V32] 40 football matches. Freq table, histogram, pie chart, probabilities.'},m:12,a:'depends',variant:'V32',e:{ar:'يعتمد على البيانات',en:'Depends on data'}},
+    {q:{ar:'[V32] متوازي أضلاع AB=x+2, BC=x, ∠ABC=140°. احسب الارتفاع، المساحة، وأوجد x إذا كان المحيط 38.',en:'[V32] Parallelogram AB=x+2, BC=x, ∠ABC=140°. Calculate height, area, find x if perimeter 38.'},m:9,a:'depends',variant:'V32',e:{ar:'يعتمد على الحسابات',en:'Depends on calculations'}},
+    {q:{ar:'[V32] زوايا على خط مستقيم ومضلع منتظم (135°). دائرة ومماسات وخطوط متوازية لإيجاد x,y,z.',en:'[V32] Angles on straight line and regular polygon (135°). Circle, tangents, parallel lines to find x,y,z.'},m:10,a:'depends',variant:'V32',e:{ar:'يعتمد على الحسابات',en:'Depends on calculations'}},
+    {q:{ar:'[V32] سداسي ABCDEF. إنشاءات هندسية (منصف عمودي، منصف زاوية، محال هندسية)، وقياسات ومساحات.',en:'[V32] Hexagon ABCDEF. Constructions (perp bisector, angle bisector, loci), measurements and areas.'},m:12,a:'shown',variant:'V32',e:{ar:'إنشاءات هندسية',en:'Geometric constructions'}},
+    {q:{ar:'[V32] الجدول والرسم البياني لـ y = 18/x. التماثل، التقاطع مع y = x، وانعكاس y = x في محور y.',en:'[V32] Table and graph y = 18/x. Symmetry, intersection with y = x, reflection of y = x in y-axis.'},m:12,a:'depends',variant:'V32',e:{ar:'من الرسم البياني',en:'From graph'}},
+    {q:{ar:'[V32] تبسيط وفك أقواس جبرية.',en:'[V32] Algebraic simplification and expansion.'},m:7,a:'depends',variant:'V32',e:{ar:'يعتمد على الجبر',en:'Depends on algebra'}},
+    {q:{ar:'[V32] مثلثات قائمة الزاوية متشابهة. حساب أطوال، زوايا، وصف التحويل الهندسي، ومتتابعة مسامير.',en:'[V32] Similar right triangles. Lengths, angles, describe transformation, nail sequence.'},m:13,a:'depends',variant:'V32',e:{ar:'يعتمد على الحسابات',en:'Depends on calculations'}}
+  ]},
+  
+  /* ═══════ PAPER 4 (EXTENDED) — V41, V42 Combined ═══════ */
+  {id:'p4',title:{ar:'📙 الورقة 4 (متقدم)',en:'📙 Paper 4 (Extended)'},tier:'extended',color:'#ea580c',code:{ar:'الورقة 4 — مايو/يونيو 2015 — ساعتان ونصف — 130 درجة',en:'Paper 4 — May/June 2015 — 2.5 hours — 130 marks'},questions:[
+    // Variant 41
+    {q:{ar:'[V41] مدرسة (220 بنين، 280 بنات). نسب، عدد المعلمين، لجنة، حفلة موسيقية (تذاكر وتكاليف ونسب زيادة).',en:'[V41] School (220 boys, 280 girls). Ratios, teachers, committee, concert (tickets, costs, % increase).'},m:13,a:'depends',variant:'V41',e:{ar:'يعتمد على الحسابات',en:'Depends on calculations'}},
+    {q:{ar:'[V41] 40 طالباً (حجم العائلة). المنوال، الوسيط، المتوسط. تعبير جبري لمتوسط مجموعتين.',en:'[V41] 40 students (family size). Mode, median, mean. Algebraic expression for mean of two groups.'},m:9,a:'depends',variant:'V41',e:{ar:'يعتمد على البيانات',en:'Depends on data'}},
+    {q:{ar:'[V41] تحويلات هندسية لمثلث T على شبكة (تمدد، مصفوفات، انعكاسات). صِف التحويلات وأوجد المصفوفات.',en:'[V41] Transformations of triangle T on grid (enlargement, matrices, reflections). Describe transformations and find matrices.'},m:13,a:'depends',variant:'V41',e:{ar:'يعتمد على الرسم',en:'Depends on diagram'}},
+    {q:{ar:'[V41] صندوقان A,B بهما كرات سوداء وبيضاء. مخطط شجرة، حساب الاحتمالات (كرتان بيضاوين بدون إرجاع).',en:'[V41] Boxes A,B with black and white balls. Tree diagram, calculate probabilities (two white without replacement).'},m:10,a:'depends',variant:'V41',e:{ar:'يعتمد على الاحتمالات',en:'Depends on probability'}},
+    {q:{ar:'[V41] رباعي ABCD وأقطار. حساب المساحات، أطوال الأضلاع باستخدام حساب المثلثات، وأقصر مسافة من نقطة لخط.',en:'[V41] Quad ABCD and diagonals. Calculate areas, side lengths using trig, shortest distance from point to line.'},m:14,a:'depends',variant:'V41',e:{ar:'يعتمد على الحسابات',en:'Depends on calculations'}},
+    {q:{ar:'[V41] 60 حبة بطاطس. تقدير المتوسط، ورسم مدرج تكراري دقيق.',en:'[V41] 60 potatoes. Estimate mean, draw accurate histogram.'},m:7,a:'depends',variant:'V41',e:{ar:'يعتمد على البيانات',en:'Depends on data'}},
+    {q:{ar:'[V41] أسطوانة خشبية (جذع شجرة) r=31cm, L=15m. الحجم، الكتلة، وكومة من 10 جذوع مغلفة ببلاستيك (حساب الزوايا، الأقواس، المحيط، والمساحة).',en:'[V41] Wooden cylinder (log) r=31cm, L=15m. Volume, mass, pile of 10 logs wrapped in plastic (angles, arcs, perimeter, area).'},m:17,a:'depends',variant:'V41',e:{ar:'يعتمد على الحسابات',en:'Depends on calculations'}},
+    {q:{ar:'[V41] الدوال f(x) = 2ˣ, g(x) = x(4 − x). جداول، رسوم بيانية، وحل المعادلات بيانياً.',en:'[V41] Functions f(x) = 2ˣ, g(x) = x(4 − x). Tables, graphs, solve equations graphically.'},m:15,a:'depends',variant:'V41',e:{ar:'من الرسم البياني',en:'From graph'}},
+    {q:{ar:'[V41] حل معادلات كسرية وتربيعية. تحليل. إثبات أن مساحة مثلث ومربع تؤدي إلى x² − 3x − 2 = 0 وحلها.',en:'[V41] Solve fractional and quadratic equations. Factorise. Prove triangle and square area leads to x² − 3x − 2 = 0 and solve.'},m:16,a:'depends',variant:'V41',e:{ar:'يعتمد على الجبر',en:'Depends on algebra'}},
+    {q:{ar:'[V41] موقف سيارات 1200 m². متباينات خطية، رسم المنطقة المظللة، وإيجاد أكبر عدد شاحنات وأكبر دخل.',en:'[V41] Car park 1200 m². Linear inequalities, shade region, find max trucks and max income.'},m:12,a:'depends',variant:'V41',e:{ar:'يعتمد على الرسم البياني',en:'Depends on graph'}},
+    {q:{ar:'[V41] متتابعة أنماط من النقاط والخطوط. أكمل الأشكال، أوجد الصيغ بدلالة n، وأوجد عدد الخطوط.',en:'[V41] Dot and line pattern sequence. Complete shapes, find formulas in terms of n, find number of lines.'},m:14,a:'depends',variant:'V41',e:{ar:'يعتمد على الأنماط',en:'Depends on patterns'}},
+    // Variant 42
+    {q:{ar:'[V42] ألبرتو وماريا ($240 بنسبة 3:5). فائدة بسيطة ومركبة، وحساب تكلفة عطلة ونسب مئوية.',en:'[V42] Alberto and Maria ($240 ratio 3:5). Simple and compound interest, holiday cost and percentages.'},m:13,a:'depends',variant:'V42',e:{ar:'يعتمد على الحسابات',en:'Depends on calculations'}},
+    {q:{ar:'[V42] المتجهات p,q. جمع المتجهات والمقدار. متوازي أضلاع وإيجاد متجهات الموضع بدلالة c و v.',en:'[V42] Vectors p,q. Vector addition and magnitude. Parallelogram and position vectors in terms of c and v.'},m:13,a:'depends',variant:'V42',e:{ar:'يعتمد على المتجهات',en:'Depends on vectors'}},
+    {q:{ar:'[V42] دوار (Spinner) 6 أقسام. احتمالات، شرطية، هندسية. دوار حتى يتوقف على الرقم 2.',en:'[V42] Spinner 6 sections. Probabilities, conditional, geometric. Spin until stops on 2.'},m:13,a:'depends',variant:'V42',e:{ar:'يعتمد على الاحتمالات',en:'Depends on probability'}},
+    {q:{ar:'[V42] تحويلات هندسية لمثلث T (إزاحة، دوران). صِف التحويلات وأوجد مصفوفات 2×2.',en:'[V42] Transformations of triangle T (translation, rotation). Describe transformations and find 2×2 matrices.'},m:13,a:'depends',variant:'V42',e:{ar:'يعتمد على الرسم',en:'Depends on diagram'}},
+    {q:{ar:'[V42] مدن (أوكلاند، هاميلتون، تورانجا، روتوروا). حساب الزوايا، زوايا الاتجاه، المسافة شرقاً، قانون الجيب، ومقياس رسم الخريطة.',en:'[V42] Cities (Auckland, Hamilton, Tauranga, Rotorua). Calculate angles, bearings, east distance, sine rule, map scale.'},m:15,a:'depends',variant:'V42',e:{ar:'يعتمد على الحسابات',en:'Depends on calculations'}},
+    {q:{ar:'[V42] كرة r=2.4. الحجم. 6 كرات في صندوق مكعب وأسطواني. أبعاد، حجوم، ومساحات سطحية.',en:'[V42] Sphere r=2.4. Volume. 6 spheres in cubic and cylindrical box. Dimensions, volumes, surface areas.'},m:15,a:'depends',variant:'V42',e:{ar:'يعتمد على الحسابات',en:'Depends on calculations'}},
+    {q:{ar:'[V42] 200 طالب (ساعات رياضة). تقدير المتوسط، جدول تكرار تراكمي، رسم بياني، الوسيط، المدى الربيعي، والنسبة المئوية الـ 64.',en:'[V42] 200 students (sport hours). Estimate mean, cumulative freq table, graph, median, IQR, 64th percentile.'},m:15,a:'depends',variant:'V42',e:{ar:'يعتمد على البيانات',en:'Depends on data'}},
+    {q:{ar:'[V42] صياغة معادلات جبرية. مجلات وصحف. تذاكر حافلة (بالغين وأطفال).',en:'[V42] Algebraic equations. Magazines and newspapers. Bus tickets (adults and children).'},m:13,a:'depends',variant:'V42',e:{ar:'يعتمد على الجبر',en:'Depends on algebra'}},
+    {q:{ar:'[V42] تشابه مثلثات ودوائر. زوايا المحيط والمماس. مضلع منتظم (زاوية داخلية 8 أمثال الخارجية).',en:'[V42] Similar triangles and circles. Circumference and tangent angles. Regular polygon (interior angle 8× exterior).'},m:15,a:'depends',variant:'V42',e:{ar:'يعتمد على الحسابات',en:'Depends on calculations'}},
+    {q:{ar:'[V42] مضلعات وأقطار. أكمل جدولاً (مثلث، رباعي، خماسي...). صيغة عدد الأقطار n(n−q)/p. أوجد p,q، وعدد الأضلاع لـ 170 قطراً.',en:'[V42] Polygons and diagonals. Complete table (triangle, quad, pentagon...). Diagonal formula n(n−q)/p. Find p,q, sides for 170 diagonals.'},m:13,a:'depends',variant:'V42',e:{ar:'يعتمد على الأنماط',en:'Depends on patterns'}}
+  ]}
+];
+
+function buildQuestionIndex() {
+  allQuestions = [];
+  examData.forEach(p => {
+    p.questions.forEach((q, i) => {
+      allQuestions.push({paperId: p.id, questionIndex: i, id: `${p.id}-q${i}`});
+    });
+  });
+}
+
+function saveState() {
+  const state = {
+    answers: {},
+    studentInfo: {
+      name: document.getElementById('studentName').value,
+      class: document.getElementById('studentClass').value,
+      date: document.getElementById('examDate').value
+    },
+    lang: currentLang,
+    darkMode: document.documentElement.classList.contains('dark'),
+    timeRemaining: timeRemaining
+  };
+  document.querySelectorAll('.answer-input').forEach(i => {
+    const c = i.closest('.question-card');
+    if (c) state.answers[c.id] = i.value;
+  });
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+}
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved ? JSON.parse(saved) : null;
+  } catch(e) { return null; }
+}
+
+function restoreState(state) {
+  if (!state) return;
+  if (state.answers) {
+    document.querySelectorAll('.answer-input').forEach(i => {
+      const c = i.closest('.question-card');
+      if (c && state.answers[c.id] !== undefined) {
+        i.value = state.answers[c.id];
+        checkAnswer(i);
+      }
+    });
+  }
+  if (state.studentInfo) {
+    if (state.studentInfo.name) document.getElementById('studentName').value = state.studentInfo.name;
+    if (state.studentInfo.class) document.getElementById('studentClass').value = state.studentInfo.class;
+    if (state.studentInfo.date) document.getElementById('examDate').value = state.studentInfo.date;
+  }
+  if (state.darkMode) toggleDarkMode(true);
+  if (state.timeRemaining && state.timeRemaining > 0) timeRemaining = state.timeRemaining;
+}
+
+function saveStudentInfo() { saveState(); }
+
+function renderSidebar() {
+  const sb = document.getElementById('sidebar');
+  let html = `<div class="sidebar-title">${T.sidebar_title[currentLang]}</div>`;
+  examData.forEach(p => {
+    const bg = p.tier === 'extended' ? '#dc2626' : '#2563eb';
+    const answeredCount = countAnsweredInPaper(p.id);
+    html += `<div class="sidebar-session" style="background:${bg};">
+      ${p.title[currentLang]} 
+      <span class="answered-counter">${answeredCount}/${p.questions.length}</span>
+    </div>`;
+    p.questions.forEach((q, i) => {
+      const qId = `${p.id}-q${i}`;
+      const card = document.getElementById(qId);
+      let statusClass = '';
+      if (card) {
+        if (card.classList.contains('correct')) statusClass = 'answered correct';
+        else if (card.classList.contains('incorrect')) statusClass = 'answered incorrect';
+        else if (card.querySelector('.answer-input')?.value) statusClass = 'answered';
+      }
+      const variantTag = q.variant ? `<span class="variant-badge">${q.variant}</span>` : '';
+      html += `<a href="#${qId}" class="sidebar-link ${statusClass}">${variantTag}${T.q_word[currentLang]} ${i+1}</a>`;
+    });
+  });
+  sb.innerHTML = html;
+}
+
+function renderTable(tbl) {
+  if (!tbl) return '';
+  let h = '<table class="data-table"><tbody>';
+  tbl.forEach((row, idx) => {
+    h += '<tr>';
+    row.forEach(c => {
+      if (idx === 0) h += `<th>${escapeHtml(String(c))}</th>`;
+      else h += `<td>${escapeHtml(String(c))}</td>`;
+    });
+    h += '</tr>';
+  });
+  return h + '</tbody></table>';
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function renderExam() {
+  const c = document.getElementById('exam-content');
+  let html = '';
+  examData.forEach(p => {
+    const tb = p.tier === 'extended' 
+      ? `<span class="tier-badge tier-higher">${T.extended[currentLang]}</span>`
+      : `<span class="tier-badge tier-foundation">${T.core[currentLang]}</span>`;
+    html += `<section id="${p.id}" class="page-break">
+      <div class="section-header" style="background:linear-gradient(135deg,${p.color},${p.color}cc);">
+        <h2><span class="paper-badge">📄 ${p.title[currentLang]}</span>${tb} 
+        <span style="opacity:0.9;font-size:0.8rem;">${p.code[currentLang]}</span> 
+        — ${p.questions.length} ${T.questions_word[currentLang]}</h2>
+      </div>`;
+    p.questions.forEach((q, i) => {
+      const qId = `${p.id}-q${i}`;
+      const svgHtml = q.svg && SVG_FIGURES[q.svg] ? SVG_FIGURES[q.svg] : '';
+      const tblHtml = renderTable(q.table);
+      const variantBadge = q.variant ? `<span class="variant-badge" style="font-size:.7rem;padding:2px 8px;margin-left:6px;">${q.variant}</span>` : '';
+      html += `<div class="question-card" id="${qId}">
+        <p style="margin:0 0 6px;">
+          <strong>${T.q_word[currentLang]} ${i+1}.</strong> ${variantBadge}
+          ${escapeHtml(q.q[currentLang])} 
+          <span class="marks-badge">${q.m} ${T.marks[currentLang]}</span>
+        </p>
+        ${svgHtml}${tblHtml}
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:4px;">
+          <input type="text" class="answer-input" data-answer="${escapeHtml(q.a)}" data-paper="${p.id}" 
+                 placeholder="${T.answer_ph[currentLang]}" oninput="handleAnswerInput(this)">
+          <button class="reveal-btn" onclick="toggleSubAnswer(this)">👁️</button>
+        </div>
+        <div class="answer-box hidden">✅ ${escapeHtml(q.e[currentLang])}</div>
+      </div>`;
+    });
+    html += `</section>`;
+  });
+  c.innerHTML = html;
+  document.querySelectorAll('.svg-caption').forEach(el => {
+    el.innerHTML = currentLang === 'ar' ? el.getAttribute('data-cap-ar') : el.getAttribute('data-cap-en');
+  });
+}
+
+function renderPaperScores() {
+  const c = document.getElementById('paper-scores');
+  let html = '';
+  examData.forEach(p => {
+    html += `<div class="flex justify-between items-center">
+      <span class="text-gray-700 dark:text-gray-300 text-xs">📄 ${p.title[currentLang]}</span>
+      <span id="score-${p.id}" class="font-bold text-emerald-600 text-xs">0/${p.questions.length}</span>
+    </div>`;
+  });
+  c.innerHTML = html;
+}
+
+function setLanguage(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.body.classList.toggle('en-mode', lang === 'en');
+  
+  const elements = {
+    'time-label': 'time_label', 'st-papers': 'st_papers', 'st-questions': 'st_questions',
+    'st-answered': 'st_answered', 'st-session': 'st_session', 'btn-toggle': 'btn_toggle',
+    'btn-print': 'btn_print', 'btn-expand': 'btn_expand', 'btn-collapse': 'btn_collapse',
+    'btn-submit': 'btn_submit', 'btn-export': 'btn_export', 'btn-reset': 'btn_reset',
+    'btn-share': 'btn_share', 'h-title': 'h_title', 'h-sub': 'h_sub', 'h-papers': 'h_papers',
+    'h-warn': 'h_warn', 'res-title': 'res_title', 'rl-name': 'rl_name', 'rl-date': 'rl_date',
+    'rl-total': 'rl_total', 'rl-rate': 'rl_rate', 'rl-perf': 'rl_perf', 
+    'btn-printres': 'btn_printres', 'modal-title': 'reset_title', 'modal-message': 'reset_message'
+  };
+  
+  Object.entries(elements).forEach(([id, key]) => {
+    const el = document.getElementById(id);
+    if (el && T[key]) el.innerHTML = T[key][lang];
+  });
+  
+  document.getElementById('studentName').placeholder = T.ph_name[lang];
+  document.getElementById('studentClass').placeholder = T.ph_class[lang];
+  document.getElementById('examDate').placeholder = T.ph_date[lang];
+  
+  const st = {};
+  document.querySelectorAll('.answer-input').forEach(i => {
+    const c = i.closest('.question-card');
+    if (c) st[c.id] = i.value;
+  });
+  
+  renderSidebar(); renderExam(); renderPaperScores();
+  
+  document.querySelectorAll('.answer-input').forEach(i => {
+    const c = i.closest('.question-card');
+    if (c && st[c.id] !== undefined) {
+      i.value = st[c.id];
+      checkAnswer(i);
+    }
+  });
+  
+  updateProgress();
+  saveState();
+}
+
+function toggleSubAnswer(btn) {
+  const ab = btn.closest('.question-card').querySelector('.answer-box');
+  if (ab) ab.classList.toggle('hidden');
+}
+
+function toggleAllAnswers() {
+  answersVisible = !answersVisible;
+  document.querySelectorAll('.answer-box').forEach(el => {
+    el.classList.toggle('hidden', !answersVisible);
+  });
+}
+
+function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
+function collapseAll() { document.querySelectorAll('.answer-box').forEach(b => b.classList.add('hidden')); answersVisible = false; }
+function expandAll() { document.querySelectorAll('.answer-box').forEach(b => b.classList.remove('hidden')); answersVisible = true; }
+
+function toggleDarkMode(forceOn) {
+  const isDark = document.documentElement.classList.contains('dark');
+  if (forceOn !== undefined) document.documentElement.classList.toggle('dark', forceOn);
+  else document.documentElement.classList.toggle('dark', !isDark);
+  const darkBtn = document.getElementById('darkModeBtn');
+  if (darkBtn) darkBtn.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
+  saveState();
+}
+
+function showToast(message, duration = 2000) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), duration);
+}
+
+function confirmReset() { document.getElementById('resetModal').classList.add('show'); }
+function closeModal() { document.getElementById('resetModal').classList.remove('show'); }
+
+function resetExam() {
+  document.querySelectorAll('.answer-input').forEach(i => {
+    i.value = '';
+    i.classList.remove('is-correct', 'is-incorrect');
+    const card = i.closest('.question-card');
+    if (card) card.classList.remove('correct', 'incorrect');
+  });
+  document.getElementById('studentName').value = '';
+  document.getElementById('studentClass').value = '';
+  document.getElementById('examDate').value = '';
+  document.getElementById('results-panel').classList.add('hidden');
+  collapseAll();
+  updateProgress();
+  saveState();
+  renderSidebar();
+  closeModal();
+  showToast(T.reset_success[currentLang]);
+}
+
+function exportData() {
+  const state = loadState() || {answers: {}, studentInfo: {}};
+  document.querySelectorAll('.answer-input').forEach(i => {
+    const c = i.closest('.question-card');
+    if (c) state.answers[c.id] = i.value;
+  });
+  state.studentInfo = {
+    name: document.getElementById('studentName').value,
+    class: document.getElementById('studentClass').value,
+    date: document.getElementById('examDate').value
+  };
+  state.exportDate = new Date().toISOString();
+  
+  const blob = new Blob([JSON.stringify(state, null, 2)], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `IGCSE_Math_0580_MJ2015_${new Date().toISOString().split('T')[0]}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast(T.export_success[currentLang]);
+}
+
+function normalize(s) {
+  if (!s) return '';
+  return s.toLowerCase().replace(/\s+/g, '').replace(/[×*]/g, '').replace(/[−]/g, '-')
+    .replace(/،/g, ',').replace(/÷/g, '/').replace(/²/g, '^2').replace(/³/g, '^3')
+    .replace(/√/g, 'sqrt').replace(/π/g, 'pi').replace(/∛/g, 'cbrt');
+}
+
+function checkAnswer(input) {
+  const correct = input.dataset.answer;
+  const user = input.value.trim();
+  const card = input.closest('.question-card');
+  
+  if (!correct || correct === 'shown' || correct === 'depends' || !user) {
+    card.classList.remove('correct', 'incorrect');
+    input.classList.remove('is-correct', 'is-incorrect');
+    updateProgress(); renderSidebar(); return;
+  }
+  
+  const cn = normalize(correct);
+  const un = normalize(user);
+  const parts = cn.split(',').map(p => p.trim()).filter(p => p.length > 0);
+  
+  let isCorrect = false;
+  if (un === cn) isCorrect = true;
+  
+  if (!isCorrect) {
+    const userParts = un.split(',').map(p => p.trim()).filter(p => p.length > 0);
+    if (userParts.length > 0 && userParts.every(up => parts.some(cp => up === cp || cp.includes(up) || up.includes(cp)))) {
+      isCorrect = true;
+    }
+  }
+  
+  if (!isCorrect) {
+    const userNum = parseFloat(un);
+    if (!isNaN(userNum)) {
+      for (const part of parts) {
+        const partNum = parseFloat(part);
+        if (!isNaN(partNum)) {
+          const tolerance = Math.abs(partNum * 0.02) + 0.01;
+          if (Math.abs(userNum - partNum) <= tolerance) { isCorrect = true; break; }
+        }
+      }
+    }
+  }
+  
+  if (isCorrect) {
+    card.classList.add('correct'); card.classList.remove('incorrect');
+    input.classList.add('is-correct'); input.classList.remove('is-incorrect');
+  } else {
+    card.classList.add('incorrect'); card.classList.remove('correct');
+    input.classList.add('is-incorrect'); input.classList.remove('is-correct');
+  }
+  
+  updateProgress(); renderSidebar(); saveState();
+}
+
+function handleAnswerInput(input) { checkAnswer(input); }
+
+function countAnsweredInPaper(paperId) {
+  let count = 0;
+  document.querySelectorAll(`.answer-input[data-paper="${paperId}"]`).forEach(i => {
+    if (i.value.trim()) count++;
+  });
+  return count;
+}
+
+function updateProgress() {
+  const inputs = document.querySelectorAll('.answer-input');
+  let answered = 0;
+  inputs.forEach(i => { if (i.value.trim()) answered++; });
+  const pct = inputs.length > 0 ? Math.round(answered / inputs.length * 100) : 0;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressText').textContent = pct + '%';
+  document.getElementById('answered-count').textContent = answered;
+}
+
+function navigateQuestion(direction) {
+  if (allQuestions.length === 0) return;
+  currentQuestionIndex = (currentQuestionIndex + direction + allQuestions.length) % allQuestions.length;
+  const q = allQuestions[currentQuestionIndex];
+  const el = document.getElementById(q.id);
+  if (el) {
+    el.scrollIntoView({behavior: 'smooth', block: 'start'});
+    el.classList.add('ring-2', 'ring-emerald-400');
+    setTimeout(() => el.classList.remove('ring-2', 'ring-emerald-400'), 1500);
+  }
+}
+
+function gradeExam() {
+  const paperScores = {};
+  examData.forEach(p => { paperScores[p.id] = {c: 0, t: p.questions.length}; });
+  
+  let totalCorrect = 0, totalQ = 0;
+  document.querySelectorAll('.answer-input').forEach(input => {
+    totalQ++;
+    const pid = input.dataset.paper;
+    const correct = input.dataset.answer;
+    const user = input.value.trim();
+    const card = input.closest('.question-card');
+    
+    if (correct && correct !== 'shown' && correct !== 'depends' && user) {
+      const cn = normalize(correct);
+      const un = normalize(user);
+      const parts = cn.split(',').map(p => p.trim()).filter(p => p.length > 0);
+      
+      let isCorrect = false;
+      if (un === cn) isCorrect = true;
+      if (!isCorrect) {
+        const userParts = un.split(',').map(p => p.trim()).filter(p => p.length > 0);
+        if (userParts.length > 0 && userParts.every(up => parts.some(cp => up === cp || cp.includes(up) || up.includes(cp)))) {
+          isCorrect = true;
+        }
+      }
+      if (!isCorrect) {
+        const userNum = parseFloat(un);
+        if (!isNaN(userNum)) {
+          for (const part of parts) {
+            const partNum = parseFloat(part);
+            if (!isNaN(partNum)) {
+              const tolerance = Math.abs(partNum * 0.02) + 0.01;
+              if (Math.abs(userNum - partNum) <= tolerance) { isCorrect = true; break; }
+            }
+          }
+        }
+      }
+      
+      if (isCorrect) {
+        totalCorrect++;
+        if (paperScores[pid]) paperScores[pid].c++;
+        if (card) { card.classList.add('correct'); card.classList.remove('incorrect'); }
+      } else {
+        if (card) { card.classList.add('incorrect'); card.classList.remove('correct'); }
+      }
+    }
+  });
+  
+  const score = totalQ > 0 ? Math.round(totalCorrect / totalQ * 100) : 0;
+  
+  document.getElementById('res-name').textContent = document.getElementById('studentName').value || T.student_default[currentLang];
+  document.getElementById('res-date').textContent = document.getElementById('examDate').value || new Date().toLocaleDateString();
+  document.getElementById('res-total').textContent = `${totalCorrect} / ${totalQ}`;
+  document.getElementById('success-percent').textContent = score + '%';
+  
+  examData.forEach(p => {
+    const el = document.getElementById(`score-${p.id}`);
+    if (el && paperScores[p.id]) el.textContent = `${paperScores[p.id].c}/${paperScores[p.id].t}`;
+  });
+  
+  const badge = document.getElementById('success-badge');
+  if (score >= 90) { badge.textContent = T.grade_excellent[currentLang]; badge.className = 'success-badge grade-excellent'; }
+  else if (score >= 75) { badge.textContent = T.grade_good[currentLang]; badge.className = 'success-badge grade-good'; }
+  else if (score >= 50) { badge.textContent = T.grade_pass[currentLang]; badge.className = 'success-badge grade-pass'; }
+  else { badge.textContent = T.grade_fail[currentLang]; badge.className = 'success-badge grade-fail'; }
+  
+  document.getElementById('results-panel').classList.remove('hidden');
+  document.getElementById('results-panel').scrollIntoView({behavior: 'smooth'});
+  renderSidebar();
+}
+
+function shareResults() {
+  const name = document.getElementById('res-name').textContent;
+  const total = document.getElementById('res-total').textContent;
+  const percent = document.getElementById('success-percent').textContent;
+  const badge = document.getElementById('success-badge').textContent;
+  
+  const text = `📐 نتائج امتحان Cambridge IGCSE Math 0580 — M/J 2015\n👤 ${name}\n📊 ${total} (${percent})\n🏆 ${badge}`;
+  
+  if (navigator.share) {
+    navigator.share({title: 'نتائج الامتحان', text: text}).catch(() => copyToClipboard(text));
+  } else { copyToClipboard(text); }
+}
+
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(() => showToast(T.copy_success[currentLang])).catch(() => {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    try { document.execCommand('copy'); showToast(T.copy_success[currentLang]); } catch(e) {}
+    document.body.removeChild(textarea);
+  });
+}
+
+function formatTime(seconds) {
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = seconds % 60;
+  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+}
+
+function updateTimerDisplay() {
+  const display = document.getElementById('timerDisplay');
+  if (display) {
+    display.textContent = formatTime(timeRemaining);
+    if (timeRemaining <= 600) display.classList.add('warning');
+    else display.classList.remove('warning');
+  }
+}
+
+function startTimer() {
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    if (!timerRunning) return;
+    timeRemaining--;
+    updateTimerDisplay();
+    if (timeRemaining <= 0) {
+      clearInterval(timerInterval);
+      alert(T.timeup[currentLang]);
+      gradeExam();
+    }
+    if (timeRemaining % 30 === 0) saveState();
+  }, 1000);
+}
+
+function toggleTimer() {
+  timerRunning = !timerRunning;
+  const btn = document.getElementById('timerToggle');
+  if (btn) btn.textContent = timerRunning ? '⏸️' : '▶️';
+}
+
+document.addEventListener('click', function(e) {
+  if (e.target.matches('a[href^="#"]')) {
+    e.preventDefault();
+    const href = e.target.getAttribute('href');
+    if (href && href.length > 1) {
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({behavior: 'smooth', block: 'start'});
+        const qId = href.substring(1);
+        const idx = allQuestions.findIndex(q => q.id === qId);
+        if (idx !== -1) currentQuestionIndex = idx;
+      }
+    }
+  }
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.altKey && e.key === 'ArrowLeft') {
+    navigateQuestion(currentLang === 'ar' ? 1 : -1);
+    e.preventDefault();
+  }
+  if (e.altKey && e.key === 'ArrowRight') {
+    navigateQuestion(currentLang === 'ar' ? -1 : 1);
+    e.preventDefault();
+  }
+  if (e.ctrlKey && e.key === 's') {
+    saveState();
+    showToast(T.save_success[currentLang]);
+    e.preventDefault();
+  }
+});
+
+setInterval(saveState, 10000);
+window.addEventListener('beforeunload', saveState);
+
+window.addEventListener('DOMContentLoaded', () => {
+  buildQuestionIndex();
+  renderSidebar();
+  renderExam();
+  renderPaperScores();
+  
+  const savedState = loadState();
+  if (savedState) {
+    restoreState(savedState);
+    if (savedState.lang) setLanguage(savedState.lang);
+  }
+  
+  startTimer();
+  updateProgress();
+});
+</script>
+</body>
+</html>
